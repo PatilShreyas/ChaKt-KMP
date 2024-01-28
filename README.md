@@ -1,22 +1,88 @@
-This is a Kotlin Multiplatform project targeting Android, iOS, Web, Desktop.
+# ChaKt - Chat with AI 💬✨
 
-* `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - `commonMain` is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    `iosMain` would be the right folder for such calls.
+[![Build](https://github.com/PatilShreyas/ChaKt-KMP/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/PatilShreyas/ChaKt-KMP/actions/workflows/build.yml)
 
-* `/iosApp` contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform, 
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+<img src="media/header.jpg"/>
 
+ChaKt is a multiplatform app built using Kotlin and Compose Multiplatform to demonstrate the use of
+[**_Generative AI SDK for Kotlin Multiplatform_**](https://github.com/PatilShreyas/generative-ai-kmp) to generate content using Google's Generative AI
+models. It features an simple chat based user interface and experience to interact with AI.
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html),
-[Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform/#compose-multiplatform),
-[Kotlin/Wasm](https://kotl.in/wasm/)…
+## Screenshots
 
-**Note:** Compose/Web is Experimental and may be changed at any time. Use it only for evaluation purposes.
-We would appreciate your feedback on Compose/Web and Kotlin/Wasm in the public Slack channel [#compose-web](https://slack-chats.kotlinlang.org/c/compose-web).
-If you face any issues, please report them on [GitHub](https://github.com/JetBrains/compose-multiplatform/issues).
+<table>
+    <tr>
+        <td><img src="media/android.png" width="280"  alt="Home Screen"/></td>
+        <td><img src="media/ios-mockup.jpg" width="310" alt="Home Screen Scrolled"/></td>
+    </tr>
+    <tr>
+        <td><img src="media/desktop.png"/></td>
+        <td><img src="media/web.png"/></td>
+    </tr>
+</table>
 
-You can open the web application by running the `:composeApp:wasmJsBrowserDevelopmentRun` Gradle task.
+## Built with 🛠️
+
+- [Kotlin Multiplatform](https://kotlinlang.org/lp/multiplatform/)
+- [Kotlin Coroutines](https://github.com/Kotlin/kotlinx.coroutines)
+- [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/)
+- [Generative AI SDK](https://github.com/PatilShreyas/generative-ai-kmp)
+- [Calf - File picker](https://github.com/MohamedRejeb/Calf)
+- [BuildKonfig](https://github.com/yshrsmz/BuildKonfig)
+
+## Development 🛠️
+
+### Pre-requisites
+
+- Java JDK 17+
+- Latest stable version of Android Studio IDE
+- Latest XCode (_for iOS_)
+- Gemini API Key (_Get it from [here](https://makersuite.google.com/app/apikey)_)
+
+### Setup
+
+- Clone this repository.
+- Open in the _latest version_ of Android Studio.
+- Place your Gemini API key in `local.properties` file as `gemini_api_key` property.
+
+Example:
+
+```properties
+gemini_api_key=YOUR_API_KEY
+```
+
+- Run the app on your device or emulator:
+    - For Android, run `composeApp` module by selecting `app` configuration.
+    - For iOS, run `composeApp` module by selecting `iosApp` configuration.
+    - For Desktop, run `./gradlew :composeApp:run`
+    - For Web, run `./gradlew :composeApp:wasmJsBrowserDevelopmentRun`
+
+## Contributing 🛠️
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details and the process.
+
+## License
+
+```
+MIT License
+
+Copyright (c) 2024 Shreyas Patil
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
