@@ -37,7 +37,7 @@ kotlin {
     listOf(
         iosX64(),
         iosArm64(),
-        iosSimulatorArm64()
+        iosSimulatorArm64(),
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
             baseName = "ComposeApp"
@@ -113,8 +113,8 @@ android {
     dependencies {
         debugImplementation(libs.compose.ui.tooling)
     }
-    lintOptions {
-        isAbortOnError = false
+    lint {
+        abortOnError = false
     }
 }
 
@@ -148,18 +148,19 @@ compose.experimental {
 buildkonfig {
     packageName = "dev.shreyaspatil.chakt"
 
-    val localProperties = Properties().apply {
-        val propsFile = rootProject.file("local.properties")
-        if (propsFile.exists()) {
-            load(propsFile.inputStream())
+    val localProperties =
+        Properties().apply {
+            val propsFile = rootProject.file("local.properties")
+            if (propsFile.exists()) {
+                load(propsFile.inputStream())
+            }
         }
-    }
 
     defaultConfigs {
         buildConfigField(
             FieldSpec.Type.STRING,
             "GEMINI_API_KEY",
-            localProperties["gemini_api_key"]?.toString() ?: ""
+            localProperties["gemini_api_key"]?.toString() ?: "",
         )
     }
 }
@@ -172,7 +173,7 @@ configure<com.diffplug.gradle.spotless.SpotlessExtension> {
         ktlint().editorConfigOverride(
             mapOf(
                 "ktlint_standard_filename" to "disabled",
-            )
+            ),
         )
         licenseHeaderFile(rootProject.file("licenses/MIT"))
     }
