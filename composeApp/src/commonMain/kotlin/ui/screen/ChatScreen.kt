@@ -1,5 +1,6 @@
 package ui.screen
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -84,6 +85,7 @@ fun ChatScreen(
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ChatList(
     chatMessages: List<ChatMessage>,
@@ -92,8 +94,14 @@ fun ChatList(
     val messages by remember {
         derivedStateOf { chatMessages.reversed() }
     }
-    LazyColumn(state = listState, reverseLayout = true) {
-        items(messages) { message ->
+    LazyColumn(
+        state = listState,
+        reverseLayout = true,
+    ) {
+        items(
+            items = messages,
+            key = { it.id }
+        ) { message ->
             ChatBubbleItem(message)
         }
     }
