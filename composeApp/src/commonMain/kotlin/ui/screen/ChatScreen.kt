@@ -57,11 +57,6 @@ fun ChatScreen(
             MessageInput(
                 enabled = chatUiState.canSendMessage,
                 onSendMessage = { inputText, image -> chatViewModel.sendMessage(inputText, image) },
-                resetScroll = {
-                    coroutineScope.launch {
-                        listState.scrollToItem(chatUiState.messages.lastIndex)
-                    }
-                }
             )
         }
     ) { paddingValues ->

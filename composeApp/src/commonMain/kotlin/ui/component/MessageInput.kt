@@ -11,9 +11,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.Send
 import androidx.compose.material.icons.rounded.AttachFile
 import androidx.compose.material.icons.rounded.Cancel
-import androidx.compose.material.icons.rounded.Send
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -41,8 +41,7 @@ import util.toComposeImageBitmap
 @Composable
 fun MessageInput(
     enabled: Boolean,
-    onSendMessage: (prompt: String, image: ByteArray?) -> Unit,
-    resetScroll: () -> Unit = {}
+    onSendMessage: (prompt: String, image: ByteArray?) -> Unit
 ) {
     var userMessage by rememberSaveable { mutableStateOf("") }
     var selectedImage by remember { mutableStateOf<ByteArray?>(null) }
@@ -98,12 +97,11 @@ fun MessageInput(
                                     onSendMessage(userMessage, selectedImage)
                                     userMessage = ""
                                     selectedImage = null
-                                    resetScroll()
                                 }
                             }
                         ) {
                             Icon(
-                                Icons.Rounded.Send,
+                                Icons.AutoMirrored.Rounded.Send,
                                 contentDescription = "Send message",
                             )
                         }
