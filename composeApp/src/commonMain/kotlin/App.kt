@@ -99,14 +99,14 @@ fun SetApiKeyDialog(onAiServiceInitialized: () -> Unit) {
                 )
 
                 OutlinedButton(onClick = {
-                    val key = clipboardManager.getClipboardText()
-                    val isValidKey = key?.let { isValidApiKey(it) } ?: false
+                    coroutineScope.launch {
+                        val key = clipboardManager.getClipboardText()
+                        val isValidKey = key?.let { isValidApiKey(it) } ?: false
 
-                    if (isValidKey) {
-                        apiKey = key!!
-                        isValidApiKey = true
-                    } else {
-                        coroutineScope.launch {
+                        if (isValidKey) {
+                            apiKey = key!!
+                            isValidApiKey = true
+                        } else {
                             isApiValidFromKeyboard = false
                             delay(3000)
                             isApiValidFromKeyboard = true

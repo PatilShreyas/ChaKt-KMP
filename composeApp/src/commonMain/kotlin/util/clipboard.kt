@@ -20,7 +20,7 @@ class ClipboardManager(private val platformContext: PlatformContext) {
     /**
      * Returns the text from the clipboard.
      */
-    fun getClipboardText(): String? {
+    suspend fun getClipboardText(): String? {
         return platformContext.getClipboardText()
     }
 }
@@ -34,4 +34,4 @@ fun rememberClipboardManager(): ClipboardManager {
     return remember { ClipboardManager(context) }
 }
 
-expect fun PlatformContext.getClipboardText(): String?
+expect suspend fun PlatformContext.getClipboardText(): String?
