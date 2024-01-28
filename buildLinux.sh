@@ -3,5 +3,5 @@
 # Build Linux Desktop App
 mkdir distributions
 echo "Building Linux Desktop App 🖥"
-./gradlew :composeApp:packageDeb
-cp composeApp/build/compose/binaries/main/deb/ChaKt-1.0.0.deb distributions/chakt.deb
+./gradlew :composeApp:packageUberJarForCurrentOS
+cp composeApp/build/compose/jars/chakt_1.0.0-1_amd64.jar distributions/chakt-linux-amd64.jar

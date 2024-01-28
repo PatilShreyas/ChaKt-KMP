@@ -57,9 +57,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: distributions/chakt.dmg
-          asset_name: chakt-macos.dmg
-          asset_content_type: application/dmg
+          asset_path: distributions/chakt-macos-x64.jar
+          asset_name: chakt-macos-x64.jar
+          asset_content_type: application/jar
 
       - name: Publish Web app 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.3
@@ -98,9 +98,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: distributions/chakt.deb
-          asset_name: chakt-linux.deb
-          asset_content_type: application/deb
+          asset_path: distributions/chakt-linux-amd64.jar
+          asset_name: chakt-linux-amd64.jar
+          asset_content_type: application/jar
 
   releaseWindows:
     name: Release - Windows
@@ -128,6 +128,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: distributions/chakt.msi
-          asset_name: chakt-windows.msi
-          asset_content_type: application/msi
+          asset_path: distributions/chakt-windows-x64.jar
+          asset_name: chakt-windows-x64.jar
+          asset_content_type: application/jar

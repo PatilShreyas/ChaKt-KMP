@@ -1,3 +1,3 @@
 New-Item -Path "distributions" -ItemType Directory
-.\gradlew :composeApp:packageMsi
-Copy-Item -Path composeApp/build/compose/binaries/main/msi/ChaKt-1.0.0.msi distributions/chakt.msi
+.\gradlew :composeApp:packageUberJarForCurrentOS
+Copy-Item -Path composeApp/build/compose/jars/ChaKt-windows-x64-1.0.0.jar distributions/chakt-windows-x64.jar

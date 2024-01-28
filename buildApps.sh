@@ -10,9 +10,9 @@ cp composeApp/build/outputs/apk/debug/composeApp-debug.apk distributions/chakt-a
 
 # Build Mac Desktop App
 echo "Building Mac Desktop App 🖥️"
-./gradlew :composeApp:packageDmg
+./gradlew :composeApp:packageUberJarForCurrentOS
 echo "Verifying Mac Desktop App"
-cp composeApp/build/compose/binaries/main/dmg/ChaKt-1.0.0.dmg distributions/chakt.dmg
+cp composeApp/build/compose/jars/ChaKt-macos-x64-1.0.0.jar distributions/chakt-macos-x64.jar
 
 # Build Web App
 echo "Building Web App 🌎"
