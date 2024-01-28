@@ -79,13 +79,13 @@ fun LoadingText(
                         .scale(scale)
                         .fillMaxSize()
                         .background(
-                            Brush.radialGradient(
+                            brush = Brush.linearGradient(
                                 listOf(
-                                    MaterialTheme.colorScheme.onSurface,
-                                    MaterialTheme.colorScheme.onSurfaceVariant
+                                    MaterialTheme.colorScheme.onPrimaryContainer,
+                                    MaterialTheme.colorScheme.onTertiaryContainer,
                                 )
                             ),
-                            CircleShape
+                            shape = CircleShape
                         )
                 )
             }
