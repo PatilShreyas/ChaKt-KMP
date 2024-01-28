@@ -8,12 +8,12 @@ import androidx.compose.ui.platform.LocalContext
 /**
  * Platform's context.
  */
-typealias PlatformContext = Context
+actual typealias PlatformContext = android.app.Application
 
 actual val platformContext: PlatformContext
     @Composable
     @ReadOnlyComposable
-    get() = LocalContext.current
+    get() = LocalContext.current.applicationContext as PlatformContext
 
 actual suspend fun PlatformContext.getClipboardText(): String? {
     val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
