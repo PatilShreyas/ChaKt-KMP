@@ -173,6 +173,7 @@ configure<com.diffplug.gradle.spotless.SpotlessExtension> {
         ktlint().editorConfigOverride(
             mapOf(
                 "ktlint_standard_filename" to "disabled",
+                "ktlint_standard_function-naming" to "disabled",
             ),
         )
         licenseHeaderFile(rootProject.file("licenses/MIT"))
