@@ -120,8 +120,19 @@ compose.desktop {
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "dev.shreyaspatil.chakt"
+            packageName = "ChaKt"
+            description = "ChaKt - Chat with AI"
             packageVersion = "1.0.0"
+
+            macOS {
+                iconFile.set(rootProject.file("icons/icon.icns"))
+            }
+            windows {
+                iconFile.set(rootProject.file("icons/icon.ico"))
+            }
+            linux {
+                iconFile.set(rootProject.file("icons/icon.png"))
+            }
         }
     }
 }
