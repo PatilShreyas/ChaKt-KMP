@@ -27,19 +27,8 @@ jobs:
       - name: Build with Gradle
         uses: gradle/gradle-build-action@v2
 
-      - name: Build App
+      - name: Build Apps for Android, MacOS and Web
         run: ./buildApps.sh
-
-      - name: Create Release on GitHub
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: v${{ github.event.inputs.versionName }}
-          release_name: v${{ github.event.inputs.versionName }}
-          draft: true
-          prerelease: false
 
       - name: Attach Android App 🚀
         uses: actions/upload-release-asset@v1
