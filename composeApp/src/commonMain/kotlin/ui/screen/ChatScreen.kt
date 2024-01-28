@@ -18,13 +18,12 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 import service.GenerativeAiService
 import ui.component.ChatBubbleItem
@@ -56,7 +55,12 @@ fun ChatScreen(
         bottomBar = {
             MessageInput(
                 enabled = chatUiState.canSendMessage,
-                onSendMessage = { inputText, image -> chatViewModel.sendMessage(inputText, image) },
+                onSendMessage = { inputText, image ->
+                    chatViewModel.sendMessage(inputText, image)
+                    coroutineScope.launch {
+                        listState.animateScrollToItem(0)
+                    }
+                },
             )
         }
     ) { paddingValues ->
@@ -78,17 +82,6 @@ fun ChatScreen(
             chatViewModel.onCleared()
         }
     }
-
-    LaunchedEffect(Unit) {
-        // Scrolls to the last message when model response is added in the message list
-        snapshotFlow { chatUiState.messages }
-            .filterNotNull()
-            .collect {
-                if (it.lastOrNull()?.isModelMessage() == true) {
-                    listState.scrollToItem(it.lastIndex)
-                }
-            }
-    }
 }
 
 @Composable
@@ -96,8 +89,11 @@ fun ChatList(
     chatMessages: List<ChatMessage>,
     listState: LazyListState,
 ) {
-    LazyColumn(state = listState) {
-        items(chatMessages) { message ->
+    val messages by remember {
+        derivedStateOf { chatMessages.reversed() }
+    }
+    LazyColumn(state = listState, reverseLayout = true) {
+        items(messages) { message ->
             ChatBubbleItem(message)
         }
     }
