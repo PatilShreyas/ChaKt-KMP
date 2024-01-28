@@ -31,24 +31,14 @@ jobs:
         run: ./buildApps.sh
 
       - name: Attach Android App 🚀
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v1
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: distributions/chakt-android.apk
-          asset_name: chakt-android.apk
-          asset_content_type: application/apk
+          files: distributions/chakt-android.apk
 
       - name: Attach MacOS App 🚀
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v1
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: distributions/chakt-macos-x64.jar
-          asset_name: chakt-macos-x64.jar
-          asset_content_type: application/jar
+          files: distributions/chakt-macos-x64.jar
 
       - name: Publish Web app 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.3
@@ -82,14 +72,9 @@ jobs:
         run: ./buildLinux.sh
 
       - name: Attach Linux App 🚀
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v1
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: distributions/chakt-linux-amd64.jar
-          asset_name: chakt-linux-amd64.jar
-          asset_content_type: application/jar
+          files: distributions/chakt-linux-x64.jar
 
   releaseWindows:
     name: Release - Windows
@@ -112,11 +97,6 @@ jobs:
         run: .\buildWin.ps1
 
       - name: Attach Windows App 🚀
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v1
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: distributions/chakt-windows-x64.jar
-          asset_name: chakt-windows-x64.jar
-          asset_content_type: application/jar
+          files: distributions/chakt-windows-x64.jar
