@@ -5,8 +5,7 @@
 <img src="media/header.jpg"/>
 
 ChaKt is a multiplatform app built using Kotlin and Compose Multiplatform to demonstrate the use of
-[**_Generative AI SDK for Kotlin Multiplatform_
-**](https://github.com/PatilShreyas/generative-ai-kmp) to generate content using Google's Generative
+[***Generative AI SDK for Kotlin Multiplatform***](https://github.com/PatilShreyas/generative-ai-kmp) to generate content using Google's Generative
 AI
 models. It features a simple chat based user interface and experience to interact with AI.
 
