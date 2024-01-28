@@ -8,9 +8,9 @@ permissions:
   contents: write
 
 jobs:
-  releaseAMW:
-    name: Release - Android, Mac, Web
-    runs-on: macos-latest
+  releaseLinuxAndroidWeb:
+    name: Release - Android, Linux, Web
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
@@ -30,18 +30,15 @@ jobs:
       - name: Build with Gradle
         uses: gradle/gradle-build-action@v2
 
-      - name: Build Apps for Android, MacOS and Web
+      - name: Build App
         run: ./buildApps.sh
 
-      - name: Attach Android App 🚀
+      - name: Attach Android and Linux App 🚀
         uses: softprops/action-gh-release@v1
         with:
-          files: distributions/chakt-android.apk
-
-      - name: Attach MacOS App 🚀
-        uses: softprops/action-gh-release@v1
-        with:
-          files: distributions/chakt-macos-x64.jar
+          files: |
+            distributions/chakt-android.apk
+            distributions/chakt-linux-x64.jar
 
       - name: Publish Web app 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.3
@@ -49,9 +46,9 @@ jobs:
           branch: gh-pages
           folder: distributions/chakt-web
 
-  releaseLinux:
-    name: Release - Linux
-    runs-on: ubuntu-latest
+  releaseMac:
+    name: Release - Mac
+    runs-on: macos-latest
 
     steps:
       - name: Checkout repository
@@ -66,18 +63,18 @@ jobs:
       - name: Grant Permission to Execute Gradle and scripts
         run: |
           chmod +x gradlew
-          chmod +x buildLinux.sh
+          chmod +x buildMac.sh
 
       - name: Build with Gradle
         uses: gradle/gradle-build-action@v2
 
-      - name: Build App
-        run: ./buildLinux.sh
+      - name: Build MacOS app
+        run: ./buildMac.sh
 
-      - name: Attach Linux App 🚀
+      - name: Attach MacOS App 🚀
         uses: softprops/action-gh-release@v1
         with:
-          files: distributions/chakt-linux-x64.jar
+          files: distributions/chakt-macos-x64.jar
 
   releaseWindows:
     name: Release - Windows

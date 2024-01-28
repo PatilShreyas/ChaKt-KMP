@@ -8,17 +8,14 @@ echo "Building Android App 📱"
 echo "Verifying Android App"
 cp composeApp/build/outputs/apk/debug/composeApp-debug.apk distributions/chakt-android.apk
 
-# Build Mac Desktop App
-echo "Building Mac Desktop App 🖥️"
+# Build Linux Desktop App
+mkdir distributions
+echo "Building Linux Desktop App 🖥"
 ./gradlew :composeApp:packageUberJarForCurrentOS
-echo "Verifying Mac Desktop App"
-cp composeApp/build/compose/jars/ChaKt-macos-x64-1.0.0.jar distributions/chakt-macos-x64.jar
+cp composeApp/build/compose/jars/ChaKt-linux-x64-1.0.0.jar distributions/chakt-linux-x64.jar
 
 # Build Web App
 echo "Building Web App 🌎"
 ./gradlew :composeApp:wasmJsBrowserDistribution
 mkdir distributions/chakt-wasm
 cp -r composeApp/build/dist/wasmJs/productionExecutable/ distributions/chakt-web/
-
-
-
