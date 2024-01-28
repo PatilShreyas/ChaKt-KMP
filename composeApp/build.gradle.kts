@@ -122,7 +122,7 @@ compose.desktop {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "ChaKt"
             description = "ChaKt - Chat with AI"
-            packageVersion = "1.0.0"
+            packageVersion = properties["version.name"].toString()
 
             macOS {
                 iconFile.set(rootProject.file("icons/icon.icns"))
