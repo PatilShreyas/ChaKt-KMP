@@ -114,6 +114,7 @@ android {
         debugImplementation(libs.compose.ui.tooling)
     }
     lint {
+        quiet = true
         abortOnError = false
     }
 }
