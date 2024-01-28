@@ -19,6 +19,7 @@ buildkonfig = "0.15.1"
 generativeai = "0.1.2-0.0.1-wasm"
 calf = "0.3.0"
 skiko = "0.7.90"
+spotless = "6.25.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -46,3 +47,4 @@ androidLibrary = { id = "com.android.library", version.ref = "agp" }
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig" }
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }

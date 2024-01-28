@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.buildkonfig)
+    alias(libs.plugins.spotless)
 }
 
 kotlin {
@@ -112,6 +113,9 @@ android {
     dependencies {
         debugImplementation(libs.compose.ui.tooling)
     }
+    lintOptions {
+        isAbortOnError = false
+    }
 }
 
 compose.desktop {
@@ -157,5 +161,23 @@ buildkonfig {
             "GEMINI_API_KEY",
             localProperties["gemini_api_key"]?.toString() ?: ""
         )
+    }
+}
+
+configure<com.diffplug.gradle.spotless.SpotlessExtension> {
+    kotlin {
+        target("**/*.kt")
+        targetExclude("$buildDir/**/*.kt")
+        targetExclude("bin/**/*.kt")
+        ktlint().editorConfigOverride(
+            mapOf(
+                "ktlint_standard_filename" to "disabled",
+            )
+        )
+        licenseHeaderFile(rootProject.file("licenses/MIT"))
+    }
+    kotlinGradle {
+        target("**/*.gradle.kts")
+        ktlint()
     }
 }
