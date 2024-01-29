@@ -19,18 +19,15 @@ models. It features a simple chat based user interface and experience to interac
 
 Check [releases](https://github.com/PatilShreyas/ChaKt-KMP/releases) for more information on app versions. 
 
-## Screenshots 🖼️
+## Preview ▶️
 
-<table>
-    <tr>
-        <td><img src="media/android.png" width="280"  alt="Home Screen"/></td>
-        <td><img src="media/ios-mockup.jpg" width="310" alt="Home Screen Scrolled"/></td>
-    </tr>
-    <tr>
-        <td><img src="media/desktop.png"/></td>
-        <td><img src="media/web.png"/></td>
-    </tr>
-</table>
+In the below video:
+- 1. _Running on Chrome browser_
+- 2. _Running on MacOS desktop_
+- 3. _Running on iPhone 15 Simulator_
+- 4. _Running on Android Emulator_
+
+https://github.com/PatilShreyas/ChaKt-KMP/assets/19620536/bf661cac-b7ce-4f97-ab0d-7c1fdb3ed35f
 
 ## Built with 🛠️
 
