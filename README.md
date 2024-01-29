@@ -29,6 +29,23 @@ In the below video:
 
 https://github.com/PatilShreyas/ChaKt-KMP/assets/19620536/bf661cac-b7ce-4f97-ab0d-7c1fdb3ed35f
 
+<details>
+  <summary>Screenshots</summary>
+
+#### Mobile App (Android & iOS)
+
+  <img src="media/android.png" height="400"/> <img src="media/ios-mockup.jpg" height="400"/>
+
+#### Desktop App
+
+  <img src="media/desktop.png" height="400"/> 
+
+#### Web App
+
+  <img src="media/web.png" height="400"/> 
+  
+</details>
+
 ## Built with 🛠️
 
 - [Kotlin Multiplatform](https://kotlinlang.org/lp/multiplatform/)
