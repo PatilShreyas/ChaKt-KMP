@@ -38,7 +38,7 @@ actual val platformContext: PlatformContext
     @ReadOnlyComposable
     get() = LocalContext.current.applicationContext as PlatformContext
 
-actual suspend fun PlatformContext.getClipboardText(): String? {
+actual suspend fun PlatformContext.getClipboardText(): String? = runCatching {
     val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
     val clip = clipboard.primaryClip
     if (clip != null && clip.itemCount > 0) {
@@ -46,4 +46,4 @@ actual suspend fun PlatformContext.getClipboardText(): String? {
         return item.text.toString()
     }
     return null
-}
+}.getOrNull()
