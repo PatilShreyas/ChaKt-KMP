@@ -54,6 +54,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.unit.em
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.fold
 import kotlinx.coroutines.flow.map
 
 private const val LOADER_ALT_TEXT = "[LOADER]"
@@ -116,12 +117,6 @@ fun LoadingText(
     )
 
     LaunchedEffect(key1 = stream) {
-        fun replaceLoaderWithBlank(): String {
-            return text
-                .replaceRange(text.length - LOADER_ALT_TEXT.length, text.length, "")
-                .toString()
-        }
-
         // Initialize text with a loader
         text = buildAnnotatedString {
             appendInlineContent(LOADER_INLINE_ID, LOADER_ALT_TEXT)
@@ -129,21 +124,27 @@ fun LoadingText(
 
         // Text will be animated word by word instead of characters. So separate out words out of
         // stream and then append each word on to the display text with a loader appended to it.
-        stream.map { it.split(" ") }.collect {
-            it.forEach { word ->
-                delay(50)
-                text = buildAnnotatedString {
-                    append(replaceLoaderWithBlank())
-                    append("$word ")
-                    appendInlineContent(LOADER_INLINE_ID, LOADER_ALT_TEXT)
-                }
-            }
-        }
+        val completeText = stream
+            .map { it.split(" ") }
+            .fold("") { completeText, words ->
+                var newText = completeText
+                words.forEachIndexed { index, word ->
+                    newText += if (words.lastIndex == index) word else word.plus(" ")
 
-        // Finally, remove the loader
-        text = buildAnnotatedString {
-            append(replaceLoaderWithBlank())
-        }
+                    // Add a delay to make the animation visible
+                    delay(50)
+
+                    // Update the text with a loader appended to it
+                    text = buildAnnotatedString {
+                        append(newText)
+                        appendInlineContent(LOADER_INLINE_ID, LOADER_ALT_TEXT)
+                    }
+                }
+                newText
+            }
+
+        // Finally, remove the loader and add plain response text
+        text = AnnotatedString(completeText)
         updatedOnLoaded.value.invoke(text.toString())
     }
 }
