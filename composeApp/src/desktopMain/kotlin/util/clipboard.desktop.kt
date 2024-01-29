@@ -34,5 +34,7 @@ actual object PlatformContext
 actual val platformContext: PlatformContext = PlatformContext
 
 actual suspend fun PlatformContext.getClipboardText(): String? {
-    return Toolkit.getDefaultToolkit().systemClipboard.getData(DataFlavor.stringFlavor) as? String
+    return runCatching {
+        Toolkit.getDefaultToolkit().systemClipboard.getData(DataFlavor.stringFlavor) as? String
+    }.getOrNull()
 }

@@ -34,10 +34,12 @@ actual object PlatformContext
 
 actual val platformContext: PlatformContext = PlatformContext
 
-actual suspend fun PlatformContext.getClipboardText(): String? = suspendCoroutine { cont ->
-    getClipboard().readText().then { content ->
-        content.also { cont.resume(content.toString()) }
+actual suspend fun PlatformContext.getClipboardText(): String? = runCatching {
+    suspendCoroutine { cont ->
+        getClipboard().readText().then { content ->
+            content.also { cont.resume(content.toString()) }
+        }
     }
-}
+}.getOrNull()
 
 fun getClipboard(): Clipboard = js("navigator.clipboard")
