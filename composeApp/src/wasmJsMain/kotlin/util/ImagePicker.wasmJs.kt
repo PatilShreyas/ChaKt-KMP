@@ -25,9 +25,11 @@ package util
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.toComposeImageBitmap
 import kotlinx.browser.document
+import kotlinx.coroutines.launch
 import org.jetbrains.skia.Image
 import org.khronos.webgl.ArrayBuffer
 import org.khronos.webgl.Uint8Array
@@ -40,10 +42,12 @@ import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 @Composable
-actual fun ImagePicker(onResult: (ByteArray?) -> Unit) {
-    LaunchedEffect(Unit) {
-        val data = runCatching { importImage() }.getOrNull()
-        onResult(data)
+actual fun ImagePicker(showFilePicker: Boolean, onResult: (ByteArray?) -> Unit) {
+    val scope = rememberCoroutineScope()
+    if (showFilePicker) {
+        scope.launch {
+            onResult( importImage())
+        }
     }
 }
 

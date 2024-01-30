@@ -24,35 +24,32 @@
 package util
 
 import android.graphics.BitmapFactory
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
-import com.mohamedrejeb.calf.io.readByteArray
-import com.mohamedrejeb.calf.picker.FilePickerFileType
-import com.mohamedrejeb.calf.picker.FilePickerSelectionMode
-import com.mohamedrejeb.calf.picker.rememberFilePickerLauncher
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import androidx.compose.ui.platform.LocalContext
 
 @Composable
-actual fun ImagePicker(onResult: (ByteArray?) -> Unit) {
-    val coroutineScope = rememberCoroutineScope()
+actual fun ImagePicker(showFilePicker: Boolean, onResult: (ByteArray?) -> Unit) {
+    val context = LocalContext.current
 
-    val launcher = rememberFilePickerLauncher(
-        type = FilePickerFileType.Image,
-        selectionMode = FilePickerSelectionMode.Single,
-        onResult = { files ->
-            coroutineScope.launch(Dispatchers.IO) {
-                onResult(files.firstOrNull()?.readByteArray())
-            }
-        },
-    )
-
-    LaunchedEffect(Unit) {
-        launcher.launch()
+    val pickMedia = rememberLauncherForActivityResult(
+        ActivityResultContracts.PickVisualMedia()
+    ) { imageUri ->
+        if (imageUri != null) {
+            onResult(context.contentResolver.openInputStream(imageUri)?.readBytes())
+        }
     }
+    if (showFilePicker) {
+        pickMedia.launch(
+            PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+        )
+    }
+
 }
 
 actual fun ByteArray.toComposeImageBitmap(): ImageBitmap {

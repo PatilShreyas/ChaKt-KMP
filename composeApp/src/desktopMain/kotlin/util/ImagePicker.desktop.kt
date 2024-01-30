@@ -24,34 +24,22 @@
 package util
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.toComposeImageBitmap
-import com.mohamedrejeb.calf.io.readByteArray
-import com.mohamedrejeb.calf.picker.FilePickerFileType
-import com.mohamedrejeb.calf.picker.FilePickerSelectionMode
-import com.mohamedrejeb.calf.picker.rememberFilePickerLauncher
-import kotlinx.coroutines.Dispatchers
+import com.darkrockstudios.libraries.mpfilepicker.FilePicker
 import kotlinx.coroutines.launch
 import org.jetbrains.skia.Image
 
 @Composable
-actual fun ImagePicker(onResult: (ByteArray?) -> Unit) {
-    val coroutineScope = rememberCoroutineScope()
+actual fun ImagePicker(showFilePicker:Boolean, onResult: (ByteArray?) -> Unit) {
+    val scope = rememberCoroutineScope()
+    val fileType = listOf("jpg", "png")
+    FilePicker(show = showFilePicker, fileExtensions = fileType) { file ->
+        scope.launch {
+            file?.getFileByteArray()?.let { onResult(it) }
+        }
 
-    val launcher = rememberFilePickerLauncher(
-        type = FilePickerFileType.Image,
-        selectionMode = FilePickerSelectionMode.Single,
-        onResult = { files ->
-            coroutineScope.launch(Dispatchers.IO) {
-                onResult(files.firstOrNull()?.readByteArray())
-            }
-        },
-    )
-
-    LaunchedEffect(Unit) {
-        launcher.launch()
     }
 }
 

@@ -40,7 +40,7 @@ import org.jetbrains.skia.Image
 
 @OptIn(BetaInteropApi::class)
 @Composable
-actual fun ImagePicker(onResult: (ByteArray?) -> Unit) {
+actual fun ImagePicker(showFilePicker: Boolean, onResult: (ByteArray?) -> Unit) {
     val coroutineScope = rememberCoroutineScope()
 
     val launcher = rememberFilePickerLauncher(
@@ -53,7 +53,7 @@ actual fun ImagePicker(onResult: (ByteArray?) -> Unit) {
         },
     )
 
-    LaunchedEffect(Unit) {
+    if (showFilePicker){
         launcher.launch()
     }
 }

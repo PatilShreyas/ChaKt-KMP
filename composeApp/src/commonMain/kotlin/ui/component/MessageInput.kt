@@ -137,11 +137,9 @@ fun MessageInput(
         }
     }
 
-    if (showImagePicker) {
-        ImagePicker {
+    ImagePicker(showImagePicker) {
             selectedImage = it
             showImagePicker = false
-        }
     }
 
     LaunchedEffect(selectedImage) {

@@ -65,8 +65,6 @@ kotlin {
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
 
-            // File picker
-            implementation(libs.calf.filepicker)
         }
         iosMain.dependencies {
             // File picker
@@ -76,7 +74,7 @@ kotlin {
             implementation(compose.desktop.currentOs)
 
             // File picker
-            implementation(libs.calf.filepicker)
+            implementation(libs.mpfilepicker)
         }
     }
 }
