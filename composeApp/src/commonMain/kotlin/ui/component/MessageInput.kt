@@ -137,10 +137,13 @@ fun MessageInput(
         }
     }
 
-    ImagePicker(showImagePicker) {
+    ImagePicker(showImagePicker,{
+        showImagePicker = false
+    }, {
+        it?.let {
             selectedImage = it
-            showImagePicker = false
-    }
+        }
+    })
 
     LaunchedEffect(selectedImage) {
         withContext(Dispatchers.Default) {

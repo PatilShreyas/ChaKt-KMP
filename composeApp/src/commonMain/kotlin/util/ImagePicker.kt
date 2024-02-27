@@ -29,11 +29,12 @@ import androidx.compose.ui.graphics.ImageBitmap
 /**
  * Picks image file from platform's system and gives file data in [onResult]
  * @param showFilePicker A boolean flag indicating whether to show the file picker dialog.
+ * @param onDismissDialog A lambda function to be invoked when dismissing the file picker dialog.
  * @param onResult Will be invoked when file is picked. Will be invoked with `null` when file is
  * not picked
  */
 @Composable
-expect fun ImagePicker(showFilePicker:Boolean,onResult: (ByteArray?) -> Unit)
+expect fun ImagePicker(showFilePicker: Boolean,onDismissDialog : () -> Unit, onResult: (ByteArray?) -> Unit)
 
 /**
  * Creates [ImageBitmap] from this [ByteArray]

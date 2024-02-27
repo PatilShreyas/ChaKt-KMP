@@ -34,7 +34,7 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
 
 @Composable
-actual fun ImagePicker(showFilePicker: Boolean, onResult: (ByteArray?) -> Unit) {
+actual fun ImagePicker(showFilePicker: Boolean,onDismissDialog : () -> Unit, onResult: (ByteArray?) -> Unit) {
     val context = LocalContext.current
 
     val pickMedia = rememberLauncherForActivityResult(
@@ -43,6 +43,7 @@ actual fun ImagePicker(showFilePicker: Boolean, onResult: (ByteArray?) -> Unit) 
         if (imageUri != null) {
             onResult(context.contentResolver.openInputStream(imageUri)?.readBytes())
         }
+        onDismissDialog()
     }
     if (showFilePicker) {
         pickMedia.launch(

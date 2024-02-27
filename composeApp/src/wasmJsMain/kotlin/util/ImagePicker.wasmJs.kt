@@ -42,12 +42,13 @@ import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 @Composable
-actual fun ImagePicker(showFilePicker: Boolean, onResult: (ByteArray?) -> Unit) {
+actual fun ImagePicker(showFilePicker: Boolean, onDismissDialog : () -> Unit, onResult: (ByteArray?) -> Unit) {
     val scope = rememberCoroutineScope()
     if (showFilePicker) {
         scope.launch {
-            onResult( importImage())
+            onResult(importImage())
         }
+        onDismissDialog()
     }
 }
 

@@ -40,7 +40,7 @@ import org.jetbrains.skia.Image
 
 @OptIn(BetaInteropApi::class)
 @Composable
-actual fun ImagePicker(showFilePicker: Boolean, onResult: (ByteArray?) -> Unit) {
+actual fun ImagePicker(showFilePicker: Boolean,onDismissDialog : () -> Unit, onResult: (ByteArray?) -> Unit) {
     val coroutineScope = rememberCoroutineScope()
 
     val launcher = rememberFilePickerLauncher(
@@ -50,6 +50,7 @@ actual fun ImagePicker(showFilePicker: Boolean, onResult: (ByteArray?) -> Unit) 
             coroutineScope.launch(Dispatchers.IO) {
                 onResult(files.firstOrNull()?.readByteArray())
             }
+            onDismissDialog()
         },
     )
 

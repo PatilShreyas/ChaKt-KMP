@@ -27,20 +27,52 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.toComposeImageBitmap
-import com.darkrockstudios.libraries.mpfilepicker.FilePicker
+import androidx.compose.ui.window.AwtWindow
 import kotlinx.coroutines.launch
 import org.jetbrains.skia.Image
+import java.awt.FileDialog
+import java.awt.Frame
+import java.io.File
 
 @Composable
-actual fun ImagePicker(showFilePicker:Boolean, onResult: (ByteArray?) -> Unit) {
-    val scope = rememberCoroutineScope()
-    val fileType = listOf("jpg", "png")
-    FilePicker(show = showFilePicker, fileExtensions = fileType) { file ->
-        scope.launch {
-            file?.getFileByteArray()?.let { onResult(it) }
+private fun FileDialog(
+    parent: Frame? = null,
+    onCloseRequest: (fileName: String, directory: String) -> Unit
+) = AwtWindow(
+    create = {
+        object : FileDialog(parent, "Choose a file", LOAD) {
+            override fun setVisible(value: Boolean) {
+                super.setVisible(value)
+                if (value) {
+                    file?.let {
+                        onCloseRequest(it, directory)
+                    }
+                }
+            }
         }
+    },
+    dispose = FileDialog::dispose
+)
 
+@Composable
+actual fun ImagePicker(showFilePicker: Boolean, onDismissDialog: () -> Unit, onResult: (ByteArray?) -> Unit) {
+    val scope = rememberCoroutineScope()
+    if (showFilePicker) {
+        FileDialog { fileName, directory ->
+            scope.launch {
+                val imageFile = File(directory, fileName)
+                if (imageFile.extension in listOf("jpg", "jpeg", "png")) {
+                    try {
+                        onResult(imageFile.readBytes())
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+            }
+            onDismissDialog()
+        }
     }
+
 }
 
 actual fun ByteArray.toComposeImageBitmap(): ImageBitmap {

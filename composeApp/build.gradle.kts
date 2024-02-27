@@ -72,9 +72,6 @@ kotlin {
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
-
-            // File picker
-            implementation(libs.mpfilepicker)
         }
     }
 }
