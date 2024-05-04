@@ -36,7 +36,7 @@ import kotlinx.coroutines.launch
 import service.GenerativeAiService
 import util.toComposeImageBitmap
 
-class ChatViewModel(private val aiService: GenerativeAiService) {
+class ChatViewModel(aiService: GenerativeAiService) {
     private val coroutineScope = MainScope()
 
     private val chat = aiService.startChat(
@@ -49,11 +49,15 @@ class ChatViewModel(private val aiService: GenerativeAiService) {
     private val _uiState = MutableChatUiState()
     val uiState: ChatUiState = _uiState
 
-    fun sendMessage(prompt: String, image: ByteArray?) {
+    fun sendMessage(prompt: String, imageBytes: ByteArray?) {
         val completeText = StringBuilder()
 
-        val base = if (image != null) {
-            aiService.generateContentWithVision(prompt, image)
+        val base = if (imageBytes != null) {
+            val content = content {
+                image(imageBytes)
+                text(prompt)
+            }
+            chat.sendMessageStream(content)
         } else {
             chat.sendMessageStream(prompt)
         }
@@ -65,17 +69,12 @@ class ChatViewModel(private val aiService: GenerativeAiService) {
                 .onCompletion {
                     _uiState.setLastModelMessageAsLoaded(completeText.toString())
                     _uiState.canSendMessage = true
-
-                    if (image != null) {
-                        chat.history.add(content("user") { text(prompt) })
-                        chat.history.add(content("model") { text(completeText.toString()) })
-                    }
                 }
                 .catch { _uiState.setLastMessageAsError(it.toString()) },
         )
 
         coroutineScope.launch(Dispatchers.Default) {
-            _uiState.addMessage(UserChatMessage(prompt, image?.toComposeImageBitmap()))
+            _uiState.addMessage(UserChatMessage(prompt, imageBytes?.toComposeImageBitmap()))
             _uiState.addMessage(modelMessage)
         }
     }
