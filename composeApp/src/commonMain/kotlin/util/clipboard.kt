@@ -26,6 +26,9 @@ package util
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.remember
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
+import kotlinx.coroutines.withContext
 
 /**
  * Platform's context.
@@ -43,8 +46,8 @@ class ClipboardManager(private val platformContext: PlatformContext) {
     /**
      * Returns the text from the clipboard.
      */
-    suspend fun getClipboardText(): String? {
-        return platformContext.getClipboardText()
+    suspend fun getClipboardText(): String? = withContext(Dispatchers.IO) {
+        platformContext.getClipboardText()
     }
 }
 
