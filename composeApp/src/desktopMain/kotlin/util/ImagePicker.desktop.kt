@@ -55,6 +55,4 @@ actual fun ImagePicker(onResult: (ByteArray?) -> Unit) {
     }
 }
 
-actual fun ByteArray.toComposeImageBitmap(): ImageBitmap {
-    return Image.makeFromEncoded(this).toComposeImageBitmap()
-}
+actual fun ByteArray.toComposeImageBitmap(): ImageBitmap = Image.makeFromEncoded(this).toComposeImageBitmap()

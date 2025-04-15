@@ -40,9 +40,7 @@ class GenerativeAiService private constructor(
      *
      * @param history History of conversation
      */
-    fun startChat(history: List<Content>): Chat {
-        return visionModel.startChat(history)
-    }
+    fun startChat(history: List<Content>): Chat = visionModel.startChat(history)
 
     companion object {
         @Suppress("ktlint:standard:property-naming")

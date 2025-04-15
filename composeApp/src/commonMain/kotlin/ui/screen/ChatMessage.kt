@@ -36,17 +36,11 @@ sealed interface ChatMessage {
 
     val id: String
 
-    fun isUserMessage(): Boolean {
-        return this is UserChatMessage
-    }
+    fun isUserMessage(): Boolean = this is UserChatMessage
 
-    fun isModelMessage(): Boolean {
-        return this is ModelChatMessage
-    }
+    fun isModelMessage(): Boolean = this is ModelChatMessage
 
-    fun isErrorMessage(): Boolean {
-        return this is ModelChatMessage.ErrorMessage
-    }
+    fun isErrorMessage(): Boolean = this is ModelChatMessage.ErrorMessage
 }
 
 /**

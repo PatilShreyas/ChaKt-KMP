@@ -25,6 +25,4 @@ package util
 
 import java.util.UUID
 
-actual fun getUUIDString(): String {
-    return UUID.randomUUID().toString()
-}
+actual fun getUUIDString(): String = UUID.randomUUID().toString()
