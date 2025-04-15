@@ -15,7 +15,7 @@ compose-plugin = "1.7.1"
 junit = "4.13.2"
 kotlin = "2.1.0"
 buildkonfig = "0.15.1"
-generativeai = "0.9.0-1.0.0-wasm"
+generativeai = "0.9.0-1.1.0"
 calf = "0.3.0"
 spotless = "7.0.2"
 
