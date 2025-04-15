@@ -1,23 +1,23 @@
 [versions]
-agp = "8.1.4"
-android-compileSdk = "34"
+agp = "8.9.1"
+android-compileSdk = "35"
 android-minSdk = "24"
-android-targetSdk = "34"
-androidx-activityCompose = "1.8.2"
-androidx-appcompat = "1.6.1"
+android-targetSdk = "35"
+androidx-activityCompose = "1.10.1"
+androidx-appcompat = "1.7.0"
 androidx-constraintlayout = "2.1.4"
-androidx-core-ktx = "1.12.0"
+androidx-core-ktx = "1.16.0"
 androidx-espresso-core = "3.5.1"
-androidx-material = "1.11.0"
+androidx-material = "1.12.0"
 androidx-test-junit = "1.1.5"
-compose = "1.6.7"
-compose-plugin = "1.6.1"
+compose = "1.7.8"
+compose-plugin = "1.7.1"
 junit = "4.13.2"
-kotlin = "1.9.23"
+kotlin = "2.1.0"
 buildkonfig = "0.15.1"
-generativeai = "0.5.0-1.0.0-wasm"
+generativeai = "0.9.0-1.0.0-wasm"
 calf = "0.3.0"
-spotless = "6.25.0"
+spotless = "7.0.2"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -42,6 +42,7 @@ calf-filepicker = { module = "com.mohamedrejeb.calf:calf-file-picker", version.r
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
