@@ -40,9 +40,7 @@ class GenerativeAiService private constructor(
      *
      * @param history History of conversation
      */
-    fun startChat(history: List<Content>): Chat {
-        return visionModel.startChat(history)
-    }
+    fun startChat(history: List<Content>): Chat = visionModel.startChat(history)
 
     companion object {
         @Suppress("ktlint:standard:property-naming")
@@ -51,7 +49,7 @@ class GenerativeAiService private constructor(
         val instance: GenerativeAiService by lazy {
             GenerativeAiService(
                 visionModel = GenerativeModel(
-                    modelName = "gemini-1.5-pro-latest",
+                    modelName = "gemini-2.0-flash",
                     apiKey = GEMINI_API_KEY,
                 ),
             )

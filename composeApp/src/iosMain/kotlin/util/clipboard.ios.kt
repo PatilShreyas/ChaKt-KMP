@@ -32,6 +32,4 @@ actual object PlatformContext
 
 actual val platformContext: PlatformContext = PlatformContext
 
-actual suspend fun PlatformContext.getClipboardText(): String? {
-    return runCatching { UIPasteboard.generalPasteboard.string }.getOrNull()
-}
+actual suspend fun PlatformContext.getClipboardText(): String? = runCatching { UIPasteboard.generalPasteboard.string }.getOrNull()
